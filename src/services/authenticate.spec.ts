@@ -2,6 +2,8 @@ import { InMemoryUserRepository } from '@/repositories/in-memory/in-memory-regis
 import { AuthenticateUseCase } from './authenticate.js'
 import { expect, it, beforeEach, describe } from 'vitest'
 import { hash } from 'bcryptjs'
+import { UserAlreadyExistsError } from './error/user-already-exists.js'
+import { InvalidCredentialsError } from './error/invalid-credentials-error.js'
 
 let userRepository: InMemoryUserRepository
 let sut: AuthenticateUseCase
@@ -52,6 +54,6 @@ describe('Register Use case', () => {
         email: 'maryana@gmail.com',
         password: '123123',
       })
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(InvalidCredentialsError)
   })
 })
