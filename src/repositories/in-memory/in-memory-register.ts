@@ -5,6 +5,12 @@ import { randomUUID } from 'node:crypto'
 export class InMemoryUserRepository implements UserRepository {
   public items: User[] = []
 
+  async findByName(name: string, page: number) {
+    return this.items
+      .filter((item) => item.name !== null && item.name.includes(name))
+      .slice((page - 1) * 20, page * 20)
+  }
+
   async findById(id: string) {
     const user = this.items.find((item) => item.id === id)
 
