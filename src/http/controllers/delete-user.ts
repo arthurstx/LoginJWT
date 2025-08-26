@@ -3,7 +3,7 @@ import type { FastifyRequest, FastifyReply } from 'fastify'
 import { makeDeleteUserteUseCase } from '@/services/factories/make-delete-user-use-case.js'
 import { UserIdDoesNotExists } from '@/services/error/user-id-does-not-exist.js'
 
-async function authenticate(req: FastifyRequest, rep: FastifyReply) {
+async function deleteUser(req: FastifyRequest, rep: FastifyReply) {
   const authenticateBodySchema = z.object({
     id: z.uuid(),
   })

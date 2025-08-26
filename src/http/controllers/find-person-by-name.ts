@@ -2,7 +2,7 @@ import { z } from 'zod'
 import type { FastifyRequest, FastifyReply } from 'fastify'
 import { makeFindPersonByNameUseCase } from '@/services/factories/make-find-person-by-name-use-case.js'
 
-async function authenticate(req: FastifyRequest, rep: FastifyReply) {
+export async function findPersonByName(req: FastifyRequest, rep: FastifyReply) {
   const authenticateBodySchema = z.object({
     name: z.string(),
     page: z.number(),
