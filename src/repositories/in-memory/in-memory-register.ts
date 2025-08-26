@@ -1,6 +1,7 @@
 import type { Prisma, User } from '@prisma/client'
 import type { UserRepository } from '../users-repository.js'
 import { randomUUID } from 'node:crypto'
+import { UserIdDoesNotExists } from '@/services/error/user-id-does-not-exist.js'
 
 export class InMemoryUserRepository implements UserRepository {
   public items: User[] = []
@@ -22,7 +23,7 @@ export class InMemoryUserRepository implements UserRepository {
 
   async create(data: Prisma.UserCreateInput) {
     const user = {
-      id: randomUUID(),
+      id: data.id ?? randomUUID(),
       email: data.email,
       name: data.name ?? null,
       passwordHash: (data as any).passwordHash ?? '', // adjust if passwordHash is required in input
@@ -39,5 +40,16 @@ export class InMemoryUserRepository implements UserRepository {
       return null
     }
     return user
+  }
+  async delete(id: string) {
+    const index = this.items.findIndex((item) => item.id === id)
+
+    if (index === -1) {
+      throw new UserIdDoesNotExists()
+    }
+
+    const [user] = this.items.splice(index, 1)
+    // Guarantee user is always defined due to the check above
+    return user!
   }
 }
