@@ -1,23 +1,22 @@
 import { z } from 'zod'
 import type { FastifyRequest, FastifyReply } from 'fastify'
-import { makeFindPersonByNameUseCase } from '@/services/factories/make-find-person-by-name-use-case.js'
+import { makeDeleteUserteUseCase } from '@/services/factories/make-delete-user-use-case.js'
+import { UserIdDoesNotExists } from '@/services/error/user-id-does-not-exist.js'
 
 async function authenticate(req: FastifyRequest, rep: FastifyReply) {
   const authenticateBodySchema = z.object({
-    name: z.string(),
-    page: z.number(),
+    id: z.uuid(),
   })
-  const { name, page } = authenticateBodySchema.parse(req.body)
+  const { id } = authenticateBodySchema.parse(req.body)
 
   try {
-    const authenticateUseCase = makeFindPersonByNameUseCase()
+    const authenticateUseCase = makeDeleteUserteUseCase()
 
     await authenticateUseCase.execute({
-      name,
-      page,
+      id,
     })
   } catch (err) {
-    if (err instanceof Error) {
+    if (err instanceof UserIdDoesNotExists) {
       return rep.status(409).send({ message: err.message })
     }
     throw err
