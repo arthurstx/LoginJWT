@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id                String             @id @default(cuid())
+  id                String             @id @default(uuid())
   email             String             @unique
   passwordHash      String
   name              String
@@ -25,7 +25,7 @@ model User {
 }
 
 model VerificationToken {
-  id        String   @id @default(cuid())
+  id        String   @id @default(uuid())
   token     String   @unique
   expiresAt DateTime
   user      User     @relation(fields: [userId], references: [id])

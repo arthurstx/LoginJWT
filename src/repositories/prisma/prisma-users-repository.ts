@@ -5,7 +5,12 @@ import type { UserRepository } from '../users-repository.js'
 export class PrismaUsersRepository implements UserRepository {
   async findByName(name: string, page: number) {
     const list = await prisma.user.findMany({
-      where: { name: name },
+      where: {
+        name: {
+          contains: name, // qualquer parte do nome
+          mode: 'insensitive', // ignora maiúsculas/minúsculas
+        },
+      },
       take: 20,
       skip: (page - 1) * 20,
     })

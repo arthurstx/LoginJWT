@@ -5,8 +5,8 @@ import { findPersonByName } from './controllers/find-person-by-name.js'
 import { deleteUser } from './controllers/delete-user.js'
 
 export async function appRoutes(app: FastifyInstance) {
-  app.post('/users', register)
-  app.post('/sessions', authenticate)
-  app.get('/', findPersonByName)
+  app.post('/register', register)
+  app.post('/login', authenticate)
+  app.get('/find-person', findPersonByName)
   app.delete('/', deleteUser)
 }
