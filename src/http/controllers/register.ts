@@ -1,9 +1,9 @@
 import { z } from 'zod'
-import type { FastifyRequest, FastifyReply } from 'fastify'
+import type { Request, Response } from 'express'
 import { makeRegisterUseCase } from '@/services/factories/make-register-use-case.js'
 import { UserAlreadyExistsError } from '@/services/error/user-already-exists.js'
 
-export async function register(req: FastifyRequest, rep: FastifyReply) {
+export async function register(req: Request, rep: Response) {
   const authenticateBodySchema = z.object({
     name: z.string(),
     email: z.email(),

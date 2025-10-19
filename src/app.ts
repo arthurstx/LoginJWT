@@ -1,30 +1,29 @@
-import fastify from 'fastify'
-import { appRoutes } from './http/routes.js'
-import { ZodError, z } from 'zod' // corrige a importação
-import { env } from './env/index.js'
+import express from 'express'
 
-export const app = fastify()
-app.register(appRoutes)
 
-app.setErrorHandler((error, _, resp) => {
-  console.error('🔥 ERROR CAPTURADO:', error)
-  if (error instanceof ZodError) {
-    // Exemplo de formatação com opções:
-    const tree = z.treeifyError(error)
-    // ou const pretty = z.prettifyError(error)
-    // ou const flat = z.flattenError(error)
+import cookieParser from 'cookie-parser'
+import { ZodError } from 'zod'
+import { routes } from './http/routes.js'
 
-    return resp.status(400).send({
-      message: 'Validation error.',
-      issues: error.issues, // array original (cru)
-      tree, // estrutura hierárquica (uso mais comum em objetos grandes)
-      // pretty,                 // mensagem legível (ideal para logs ou resposta textual)
-      // flat,                   // formato simples para campos em formulários
-    })
+
+export const app = express()
+app.use(cors())
+app.use(express.json())
+app.use(cookieParser())
+
+app.use(routes)
+
+// error handler final
+app.use((err: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  if (err instanceof ZodError) {
+    return res.status(400).json({ message: 'Validation error.', issues: err.issues })
   }
-
-  if (env.NODE_ENV !== 'production') {
-    console.error(error)
+  if (process.env.NODE_ENV !== 'production') {
+    console.error(err)
   }
-  return resp.status(500).send({ message: 'Internal server error.' })
+  return res.status(500).json({ message: 'Internal server error.' })
 })
+function cors(): any {
+  throw new Error('Function not implemented.')
+}
+

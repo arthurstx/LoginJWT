@@ -1,20 +1,17 @@
-//Imporante para definir as variaveis de ambiente
+// src/env/index.ts
 import 'dotenv/config'
-//A biblioteca zod serve para validar dados, definir um 'schema'(modelo) ou ate mesmo tipar dados
 import { z } from 'zod'
 
-//Aqui eu estou definindo um modelo do meu env
 const envSchema = z.object({
-  NODE_ENV: z.enum(['dev', 'test', 'production']).default('dev'), //estou dizendo que o NODE_ENV tem q ser alguma dessas strings
-  PORT: z.number().default(3333), //aqui eu digo que a porta pode ser um numero e caso não seja vai ser 3333
+  NODE_ENV: z.enum(['dev', 'test', 'production']).default('dev'),
+  PORT: z.coerce.number().default(3333),
+  JWT_SECRET: z.string().min(20),             
+  JWT_EXPIRES_IN: z.coerce.number().default(900),
 })
 
-const _env = envSchema.safeParse(process.env)
-//faço a validação do env e envio um aviso caso tenha erro
-if (_env.success === false) {
-  console.error('Invalid environment variable', _env.error.format())
-
+const parsed = envSchema.safeParse(process.env)
+if (!parsed.success) {
+  console.error(parsed.error.format())
   throw new Error('Invalid environment variable.')
 }
-
-export const env = _env.data
+export const env = parsed.data  

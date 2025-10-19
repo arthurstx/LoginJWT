@@ -1,12 +1,19 @@
-import type { FastifyInstance } from 'fastify'
-import { register } from './controllers/register.js'
+import { Router } from 'express'
 import { authenticate } from './controllers/authenticate.js'
+import { register } from './controllers/register.js'
+import { me } from './controllers/me.js'
 import { findPersonByName } from './controllers/find-person-by-name.js'
 import { deleteUser } from './controllers/delete-user.js'
+import { verifyJWT } from '@/middlewares/verify-jwt.js'
 
-export async function appRoutes(app: FastifyInstance) {
-  app.post('/register', register)
-  app.post('/login', authenticate)
-  app.get('/find-person', findPersonByName)
-  app.delete('/', deleteUser)
-}
+
+export const routes = Router()
+
+// públicas
+routes.post('/register', register)
+routes.post('/login', authenticate)
+
+// autenticadas
+routes.get('/me', verifyJWT, me)
+routes.get('/find-person', verifyJWT, findPersonByName)
+routes.delete('/', verifyJWT, deleteUser)

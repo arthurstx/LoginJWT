@@ -1,8 +1,9 @@
 import { z } from 'zod'
-import type { FastifyRequest, FastifyReply } from 'fastify'
+import type { Request, Response } from 'express'
+
 import { makeFindPersonByNameUseCase } from '@/services/factories/make-find-person-by-name-use-case.js'
 
-export async function findPersonByName(req: FastifyRequest, rep: FastifyReply) {
+export async function findPersonByName(req: Request, rep: Response) {
   // validação dos query params
   const querySchema = z.object({
     name: z.string(),
