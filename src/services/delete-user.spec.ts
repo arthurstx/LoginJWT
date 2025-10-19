@@ -1,7 +1,6 @@
 import { InMemoryUserRepository } from '@/repositories/in-memory/in-memory-register.js'
 import { expect, it, beforeEach, describe } from 'vitest'
 import { hash } from 'bcryptjs'
-import { InvalidCredentialsError } from './error/invalid-credentials-error.js'
 import { DeleteUsersUseCase } from './delete-user.js'
 import { UserIdDoesNotExists } from './error/user-id-does-not-exist.js'
 let userRepository: InMemoryUserRepository
