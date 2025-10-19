@@ -36,6 +36,7 @@ describe('Delete Use case', () => {
   it('should not be able to delete user with wrong id', async () => {
     await userRepository.create({
       id: 'user-1',
+      name: 'maryana',
       email: 'maryana@gmail.com',
       passwordHash: await hash('123456', 6),
     })
