@@ -6,12 +6,8 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "vercel-build": "prisma generate && tsup server.ts",
-    "postinstall": "prisma generate",
-    "start": "node build/server.cjs",
-    "build": "tsup src --out-dir build",
-    "prisma:generate": "prisma generate",
-    "prisma:push": "prisma db push",
-    "prisma:studio": "prisma studio",
+    "start": "node dist/server.js",
+    "build": "tsc -p tsconfig.build.json",
     "pgsql": "docker exec -it api-solid-pg psql -U docker -d apisolid",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -35,6 +31,7 @@
     "fastify-cli": "^7.4.0",
     "fastify-plugin": "^5.0.0",
     "jsonwebtoken": "9.0.2",
+    "serverless-http": "4.0.0",
     "zod": "4.0.16"
   },
   "devDependencies": {
