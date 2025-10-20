@@ -1,12 +1,24 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "rootDir": ".",
     "outDir": "dist",
+
+    // Compila para CommonJS (compatível com api/index.cjs)
     "module": "CommonJS",
-    "target": "ES2022",
+    "moduleResolution": "Node",
+
+    // 🔧 Desliga a restrição que está te quebrando:
+    "verbatimModuleSyntax": false,
+
+    // Facilita import default de libs CJS (ex.: jsonwebtoken)
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "rootDir": "."
+    "allowSyntheticDefaultImports": true,
+
+    "target": "ES2022",
+    "skipLibCheck": true
   },
-  "include": ["src", "api"]
+
+  // Não precisamos compilar testes para o deploy
+  "exclude": ["src/**/*.spec.ts"]
 }
