@@ -1,5 +1,4 @@
 {
   "version": 2,
-  "builds": [{ "src": "dist/api-vercel.js", "use": "@vercel/node" }],
-  "routes": [{ "src": "/(.*)", "dest": "dist/api-vercel.js" }]
+  "buildCommand": "npm run vercel-build"
 }

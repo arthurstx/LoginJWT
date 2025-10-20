@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "vercel-build": "prisma generate && tsup src/api-vercel.ts --out-dir dist --format cjs --dts --minify",
+    "vercel-build": "prisma generate && tsup src/api-vercel.ts --out-dir dist --format cjs --platform=node --target=node20",
     "postinstall": "prisma generate",
     "start": "node build/server.cjs",
     "build": "tsup src --out-dir build",
