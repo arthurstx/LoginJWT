@@ -4,8 +4,7 @@ import { register } from './controllers/register.js'
 import { me } from './controllers/me.js'
 import { findPersonByName } from './controllers/find-person-by-name.js'
 import { deleteUser } from './controllers/delete-user.js'
-import { verifyJWT } from '@/middlewares/verify-jwt.js'
-
+import { verifyJWT } from '../../src/middlewares/verify-jwt.js'
 
 export const routes = Router()
 
