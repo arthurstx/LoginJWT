@@ -2,7 +2,7 @@ import { defineConfig } from 'tsup'
 import path from 'node:path'
 
 export default defineConfig({
-  entry: ['src/api-vercel.ts'],
+  entry: ['src/index.ts'],
   outDir: 'dist',
   format: ['cjs'],
   platform: 'node',
