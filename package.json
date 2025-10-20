@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "vercel-build": "prisma generate && tsup server.ts",
+    "vercel-build": "prisma generate && npm run build",
     "start": "node dist/server.js",
     "build": "tsc -p tsconfig.build.json",
     "pgsql": "docker exec -it api-solid-pg psql -U docker -d apisolid",
