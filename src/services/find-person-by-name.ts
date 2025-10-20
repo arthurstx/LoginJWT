@@ -1,4 +1,4 @@
-import type { UserRepository } from '@/repositories/users-repository.js'
+import type { UserRepository } from '../repositories/users-repository.js'
 import type { User } from '@prisma/client'
 
 interface FindPersoByNameUseCaseRequest {

@@ -1,6 +1,5 @@
-import { prisma } from '@/lib/prisma.js'
+import { prisma } from '../../lib/prisma.js'
 import type { Request, Response } from 'express'
-
 
 export async function me(req: Request, res: Response) {
   const userId = req.userId!

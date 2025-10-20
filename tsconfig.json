@@ -33,8 +33,8 @@
     // "noPropertyAccessFromIndexSignature": true,
 
     "baseUrl": "./",
-    "paths": { "@/*": ["./src/*"] },
-     "esModuleInterop": true,
+    "paths": { "../../*": ["../../*"] },
+    "esModuleInterop": true,
     "skipLibCheck": true,
 
     // Recommended Options
@@ -43,8 +43,7 @@
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
- 
+    "moduleDetection": "force"
   },
-    "include": ["src", "api"]
+  "include": ["src", "api"]
 }

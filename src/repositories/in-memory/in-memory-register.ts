@@ -1,7 +1,7 @@
 import type { Prisma, User } from '@prisma/client'
 import type { UserRepository } from '../users-repository.js'
 import { randomUUID } from 'node:crypto'
-import { UserIdDoesNotExists } from '@/services/error/user-id-does-not-exist.js'
+import { UserIdDoesNotExists } from '../../services/error/user-id-does-not-exist.js'
 
 export class InMemoryUserRepository implements UserRepository {
   public items: User[] = []

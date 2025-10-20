@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import type { Request, Response } from 'express'
-import { makeDeleteUserteUseCase } from '@/services/factories/make-delete-user-use-case.js'
-import { UserIdDoesNotExists } from '@/services/error/user-id-does-not-exist.js'
+import { makeDeleteUserteUseCase } from '../../services/factories/make-delete-user-use-case.js'
+import { UserIdDoesNotExists } from '../../services/error/user-id-does-not-exist.js'
 
 export async function deleteUser(req: Request, rep: Response) {
   const authenticateBodySchema = z.object({

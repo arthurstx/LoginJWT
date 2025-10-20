@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "vercel-build": "prisma generate && tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
+    "vercel-build": "prisma generate && tsup server.ts",
     "postinstall": "prisma generate",
     "start": "node build/server.cjs",
     "build": "tsup src --out-dir build",

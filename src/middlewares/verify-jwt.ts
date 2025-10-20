@@ -1,7 +1,6 @@
-
-import { env } from '@/env/index.js'
+import { env } from '../env/index.js'
 import type { Request, Response, NextFunction } from 'express'
-import jwt, { type JwtPayload } from 'jsonwebtoken'  // ✅ default import (CJS compat)
+import jwt, { type JwtPayload } from 'jsonwebtoken'
 
 export function verifyJWT(req: Request, res: Response, next: NextFunction) {
   const auth = req.header('authorization') || req.get('authorization')
@@ -11,8 +10,11 @@ export function verifyJWT(req: Request, res: Response, next: NextFunction) {
   const token = auth.slice('Bearer '.length)
 
   try {
-    const payload = jwt.verify(token, env.JWT_SECRET) as JwtPayload & { sub?: string }
-    if (!payload?.sub) return res.status(401).json({ message: 'Token missing subject' })
+    const payload = jwt.verify(token, env.JWT_SECRET) as JwtPayload & {
+      sub?: string
+    }
+    if (!payload?.sub)
+      return res.status(401).json({ message: 'Token missing subject' })
 
     req.userId = payload.sub
     return next()

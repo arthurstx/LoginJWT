@@ -1,4 +1,4 @@
-import type { UserRepository } from '@/repositories/users-repository.js'
+import type { UserRepository } from '../repositories/users-repository.js'
 import type { User } from '@prisma/client'
 import { UserIdDoesNotExists } from './error/user-id-does-not-exist.js'
 
