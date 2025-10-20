@@ -5,7 +5,7 @@ import { me } from './controllers/me.js'
 import { findPersonByName } from './controllers/find-person-by-name.js'
 import { deleteUser } from './controllers/delete-user.js'
 import { verifyJWT } from '../.../../middlewares/verify-jwt.js'
-import { prisma } from 'src/lib/prisma.js'
+import { prisma } from '../lib/prisma.js'
 
 export const routes = Router()
 
