@@ -14,7 +14,7 @@ routes.get('/health', (_req, res) => res.json({ ok: true }))
 // públicas
 routes.post('/register', register)
 routes.post('/login', authenticate)
-routes.get('/health', (_req,res)=>res.json({ok:true}))
+routes.get('/health', (_req, res) => res.json({ ok: true }))
 routes.get('/db-ping', async (_req, res) => {
   try {
     await prisma.$runCommandRaw({ ping: 1 } as any)
@@ -26,6 +26,6 @@ routes.get('/db-ping', async (_req, res) => {
 })
 
 // autenticadas
-routes.get('/me', verifyJWT, me)
+routes.get('/protected', verifyJWT, me)
 routes.get('/find-person', verifyJWT, findPersonByName)
 routes.delete('/', verifyJWT, deleteUser)
