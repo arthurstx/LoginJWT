@@ -1,4 +1,4 @@
--- CreateTable
+npm-- CreateTable
 CREATE TABLE "public"."User" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
