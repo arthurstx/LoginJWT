@@ -5,7 +5,7 @@ import { UserIdDoesNotExists } from '../../services/error/user-id-does-not-exist
 
 export async function deleteUser(req: Request, rep: Response) {
   const authenticateBodySchema = z.object({
-    id: z.uuid(),
+    id: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid MongoDB ObjectId'),
   })
   const { id } = authenticateBodySchema.parse(req.body)
 
@@ -21,5 +21,5 @@ export async function deleteUser(req: Request, rep: Response) {
     }
     throw err
   }
-  return rep.status(201).send()
+  return rep.status(201).json({message:"delate user"})
 }

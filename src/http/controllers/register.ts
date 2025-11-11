@@ -25,5 +25,5 @@ export async function register(req: Request, rep: Response) {
     }
     throw err
   }
-  return rep.status(201).send()
+  return rep.status(201).json({message:"create user"})
 }

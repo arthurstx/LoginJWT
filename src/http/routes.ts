@@ -9,8 +9,6 @@ import { prisma } from '../lib/prisma.js'
 
 export const routes = Router()
 
-routes.get('/health', (_req, res) => res.json({ ok: true }))
-
 // públicas
 routes.post('/register', register)
 routes.post('/login', authenticate)

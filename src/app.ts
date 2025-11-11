@@ -3,8 +3,10 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import { ZodError } from 'zod'
 import { routes } from './http/routes.js'
+import cors from 'cors'
 
 const app = express()
+app.use(cors())
 
 app.use(express.json())
 app.use(cookieParser())
@@ -18,12 +20,14 @@ app.use(
     _next: express.NextFunction
   ) => {
     if (err instanceof ZodError) {
-      return res.status(400).json({ message: 'Validation error.', issues: err.issues })
+      return res
+        .status(400)
+        .json({ message: 'Validation error.', issues: err.issues })
     }
     if (process.env.NODE_ENV !== 'production') console.error(err)
     return res.status(500).json({ message: 'Internal server error.' })
   }
 )
 
-export default app          
-export { app }             
+export default app
+export { app }

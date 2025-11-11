@@ -21,5 +21,4 @@ export async function findPersonByName(req: Request, rep: Response) {
     }
     throw err
   }
-  return rep.status(200).send()
 }
